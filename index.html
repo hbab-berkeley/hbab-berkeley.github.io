@@ -226,9 +226,9 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
 .hero-bg::after{content:"";position:absolute;inset:0;opacity:.16;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 .mission{position:relative;margin:110px auto 0;max-width:1400px;border-radius:44px 44px 0 0;overflow:hidden;color:#fff;text-align:center;min-height:560px;display:grid;place-items:center;padding:110px 28px}
-.mission img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-.mission::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,61,.8),rgba(10,31,61,.88))}
-.mission .in{position:relative;max-width:820px}
+.mission img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.mission::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,31,61,.8),rgba(10,31,61,.88))}
+.mission .in{position:relative;z-index:2;max-width:820px}
 .mission .eyebrow{color:var(--yellow)}
 .mission h2{color:#fff;font-size:clamp(2.6rem,6vw,4.8rem);margin-bottom:22px}
 .mission h2 em.accent{color:var(--yellow)}
@@ -298,6 +298,49 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
   .svcs{grid-template-columns:1fr}
   .steps2{grid-template-columns:1fr}
 }
+
+
+/* ---- Interactive homepage ---- */
+.marquee{overflow:hidden;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);margin-top:80px;padding:22px 0;background:var(--paper)}
+.marquee .track{display:flex;align-items:center;gap:34px;width:max-content;animation:marq 48s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.marquee span{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);color:var(--navy);white-space:nowrap}
+.marquee span:nth-of-type(even){font-style:italic;color:#2B5A97}
+.marquee i{font-style:normal;color:var(--yellow-deep);font-size:1rem}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+.story{position:relative;height:420vh;background:var(--navy-deep);color:#fff;margin-top:80px}
+.story-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+.story-sticky::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 70% 50%,rgba(43,90,151,.35),transparent 60%)}
+.story-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.story-copy{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;pointer-events:none}
+.story-copy .eyebrow{color:var(--yellow)}
+.story-steps{position:relative;height:300px;max-width:440px}
+.story-step{position:absolute;inset:0;opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.story-step.on{opacity:1;transform:none}
+.story-step .tag{display:block;font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.story-step h2{color:#fff;font-size:clamp(2.4rem,4.6vw,3.8rem)}
+.story-step h2 em.accent{color:var(--yellow)}
+.story-step p{color:rgba(255,255,255,.78);font-size:1.08rem;margin:0;max-width:38ch}
+.story-dots{display:flex;gap:10px;margin-top:10px}
+.story-dots i{width:28px;height:3px;border-radius:3px;background:rgba(255,255,255,.2);transition:background .4s,width .4s}
+.story-dots i.on{background:var(--yellow);width:46px}
+.story-hint{position:absolute;z-index:2;left:50%;bottom:26px;transform:translateX(-50%);margin:0;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:opacity .4s}
+.story-hint::after{content:"";display:block;width:1px;height:28px;margin:8px auto 0;background:linear-gradient(rgba(255,255,255,.5),transparent);animation:hint 1.8s ease-in-out infinite}
+@keyframes hint{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+.story + .mission{margin-top:0}
+
+[data-words] .w{opacity:.22;transition:opacity .25s linear}
+[data-words] .w.lit{opacity:1}
+
+@media (max-width:820px){
+  .story{height:380vh}
+  .story-copy{justify-content:flex-end;padding-bottom:110px}
+  .story-sticky::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,transparent 35%,rgba(7,23,45,.92) 72%)}
+  .story-steps{height:230px}
+  .story-step h2{font-size:2.3rem}
+}
+@media (prefers-reduced-motion:reduce){.marquee .track{animation:none}}
 
 /* ---------- responsive ---------- */
 @media (max-width:980px){
@@ -387,12 +430,33 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
     </div>
   </div>
 
+  <div class="marquee" aria-label="Sectors we explore">
+    <div class="track"><span>Biotech</span><i aria-hidden="true">✦</i><span>Pharma</span><i aria-hidden="true">✦</i><span>Digital Health</span><i aria-hidden="true">✦</i><span>Medical Devices</span><i aria-hidden="true">✦</i><span>Health Systems</span><i aria-hidden="true">✦</i><span>Public Health</span><i aria-hidden="true">✦</i><span>Life Science Investing</span><i aria-hidden="true">✦</i><span>Healthcare Consulting</span><i aria-hidden="true">✦</i><span>Biotech</span><i aria-hidden="true">✦</i><span>Pharma</span><i aria-hidden="true">✦</i><span>Digital Health</span><i aria-hidden="true">✦</i><span>Medical Devices</span><i aria-hidden="true">✦</i><span>Health Systems</span><i aria-hidden="true">✦</i><span>Public Health</span><i aria-hidden="true">✦</i><span>Life Science Investing</span><i aria-hidden="true">✦</i><span>Healthcare Consulting</span><i aria-hidden="true">✦</i></div>
+  </div>
+
+  <section class="story" id="story" aria-label="Where biology meets business">
+    <div class="story-sticky">
+      <canvas class="story-canvas" aria-hidden="true"></canvas>
+      <div class="story-copy wrap">
+        <p class="eyebrow">Why HBAB</p>
+        <div class="story-steps">
+          <div class="story-step on"><span class="tag">01 · Biology</span><h2>It starts with <em class="accent">science.</em></h2><p>Every therapy, device, and diagnosis begins in a lab, with a question about how life works.</p></div>
+          <div class="story-step"><span class="tag">02 · Healthcare</span><h2>Science becomes <em class="accent">care.</em></h2><p>Hospitals, clinicians, and patients are where discoveries meet real people.</p></div>
+          <div class="story-step"><span class="tag">03 · Business</span><h2>Care needs systems that <em class="accent">work.</em></h2><p>Strategy, markets, and operations decide which ideas actually reach the people who need them.</p></div>
+          <div class="story-step"><span class="tag">04 · HBAB</span><h2>That's where <em class="accent">we come in.</em></h2><p>We train Berkeley students to lead at the intersection of all three.</p></div>
+        </div>
+        <div class="story-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+      <p class="story-hint" aria-hidden="true">Scroll</p>
+    </div>
+  </section>
+
   <section class="mission reveal">
     <img src="img/groups/mission.jpg" alt="HBAB members lined up under an archway" loading="lazy">
     <div class="in">
       <p class="eyebrow">Our mission</p>
       <h2>Healthcare Business Association <em class="accent">at Berkeley</em></h2>
-      <p class="m">We're a community of future <strong>clinicians, scientists, analysts, and founders</strong> with one goal: to make the business of healthcare <em>accessible</em> to every Berkeley student, and to train the people who will <em>run it better</em>.</p>
+      <p class="m" data-words>We're a community of future <strong>clinicians, scientists, analysts, and founders</strong> with one goal: to make the business of healthcare <em>accessible</em> to every Berkeley student, and to train the people who will <em>run it better</em>.</p>
     </div>
   </section>
 
@@ -814,6 +878,152 @@ menuBtn.addEventListener("click", () => {
   menuBtn.setAttribute("aria-expanded", open);
 });
 route();
+/* ===== Interactive homepage: particle story, word reveal, parallax ===== */
+(function(){
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* --- mission words light up as you scroll --- */
+  document.querySelectorAll("[data-words]").forEach(el => {
+    const walk = n => { [...n.childNodes].forEach(c => {
+      if (c.nodeType === 3) { const f = document.createDocumentFragment();
+        c.textContent.split(/(\s+)/).forEach(t => { if (!t) return; if (/^\s+$/.test(t)) f.append(t); else { const sp = document.createElement("span"); sp.className = "w"; sp.textContent = t; f.append(sp); } });
+        c.replaceWith(f);
+      } else if (c.nodeType === 1) walk(c);
+    }); };
+    walk(el);
+  });
+  function words(){
+    document.querySelectorAll(".page.on [data-words]").forEach(el => {
+      const r = el.getBoundingClientRect(), vh = innerHeight;
+      const p = Math.min(1, Math.max(0, (vh*0.9 - r.top) / (vh*0.55)));
+      const ws = el.querySelectorAll(".w"), n = Math.round(p*ws.length);
+      ws.forEach((w,i) => w.classList.toggle("lit", i < n));
+    });
+  }
+
+  /* --- gentle parallax on page header photos --- */
+  function parallax(){
+    if (reduce) return;
+    const bg = document.querySelector(".page.on .hero-bg"); if (!bg) return;
+    const y = Math.min(scrollY, innerHeight); bg.style.transform = `translate3d(0,${y*0.28}px,0)`;
+  }
+
+  /* --- particle story --- */
+  const sec = document.getElementById("story"), cv = sec && sec.querySelector(".story-canvas");
+  if (!cv) { addEventListener("scroll", () => { words(); parallax(); }, {passive:true}); return; }
+  const ctx = cv.getContext("2d");
+  const steps = sec.querySelectorAll(".story-step"), dots = sec.querySelectorAll(".story-dots i"), hint = sec.querySelector(".story-hint");
+  const mobile = () => innerWidth < 820;
+  const N = innerWidth < 820 ? 750 : 1400;
+  let W=0, H=0, dpr=1, cx=0, cy=0, S=1, shapes=[], P=[], prog=0, visible=false, mouse={x:-1e4,y:-1e4}, t0=performance.now();
+
+  const rnd = (a,b) => a + Math.random()*(b-a);
+  const ease = x => x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2;
+  const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+
+  // 0: cell (3D points, rotated each frame)
+  const cell = Array.from({length:N}, (_,i) => {
+    if (i < N*0.78) { const k=i+.5, n=N*0.78, phi=Math.acos(1-2*k/n), th=Math.PI*(1+Math.sqrt(5))*k, r=1+rnd(-.025,.025);
+      return [r*Math.sin(phi)*Math.cos(th), r*Math.cos(phi), r*Math.sin(phi)*Math.sin(th)]; }
+    const u=Math.random(), v=Math.random(), ph=Math.acos(2*v-1), th=2*Math.PI*u, r=.32*Math.cbrt(Math.random());
+    return [.18+r*Math.sin(ph)*Math.cos(th), -.12+r*Math.cos(ph), r*Math.sin(ph)*Math.sin(th)];
+  });
+  // 1: heartbeat line
+  function pulse(){
+    const pts=[[-1.35,0]]; const beat=(x0)=>{ pts.push([x0,0],[x0+.06,-.06],[x0+.12,0],[x0+.2,0],[x0+.24,.1],[x0+.29,-.78],[x0+.35,.34],[x0+.4,0],[x0+.5,0],[x0+.58,-.14],[x0+.68,0]); };
+    beat(-1.2); beat(-.25); beat(.7); pts.push([1.35,0]);
+    const seg=[]; let L=0; for(let i=1;i<pts.length;i++){ const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]); seg.push([pts[i-1],pts[i],L,d]); L+=d; }
+    return Array.from({length:N}, () => { const at=Math.random()*L; const s=seg.find(q=>at>=q[2]&&at<=q[2]+q[3])||seg[seg.length-1];
+      const f=(at-s[2])/s[3]; const x=s[0][0]+(s[1][0]-s[0][0])*f, y=s[0][1]+(s[1][1]-s[0][1])*f; const j=rnd(-.022,.022);
+      return [x+j*.4, y+j]; });
+  }
+  // 2: rising bar chart + trend line
+  function chart(){
+    const hs=[.32,.48,.6,.78,.98,1.22], bw=.24, gap=.13, x0=-(hs.length*bw+(hs.length-1)*gap)/2, base=.72;
+    const out=[]; const nb=Math.floor(N*.78);
+    const area=hs.reduce((a,h)=>a+h,0);
+    hs.forEach((h,i)=>{ const n=Math.round(nb*h/area); for(let k=0;k<n;k++){ const edge=Math.random()<.45;
+      let x=rnd(0,bw), y=rnd(0,h); if(edge){ const e=Math.random(); if(e<.33) x=rnd(-.006,.006); else if(e<.66) x=bw+rnd(-.006,.006); else y=h+rnd(-.006,.006); }
+      out.push([x0+i*(bw+gap)+x, base-y]); } });
+    const tl=[[x0-.05,base-.2],[x0+1.0,base-.62],[x0+1.65,base-.9],[x0+2.2,base-1.48]];
+    while(out.length<N){ const s=Math.floor(Math.random()*3), f=Math.random(); const a=tl[s], b=tl[s+1];
+      out.push([a[0]+(b[0]-a[0])*f+rnd(-.012,.012), a[1]+(b[1]-a[1])*f+rnd(-.012,.012)]); }
+    return out.slice(0,N).map(([x,y])=>[x*.95,(y-.1)]);
+  }
+  // 3: HBAB bear + heartbeat (sampled from the logo artwork)
+  function bear(){
+    const d = document.querySelector("#hbab-art path")?.getAttribute("d"); const out=[];
+    if (d) { const oc=document.createElement("canvas"); oc.width=800; oc.height=290; const o=oc.getContext("2d");
+      o.scale(2,2); o.translate(0,-90); o.fill(new Path2D(d),"evenodd");
+      const px=o.getImageData(0,0,800,290).data, filled=[];
+      for(let y=0;y<290;y+=1) for(let x=0;x<800;x+=1) if(px[(y*800+x)*4+3]>128) filled.push([x,y]);
+      for(let i=0;i<N;i++){ const p=filled[Math.floor(Math.random()*filled.length)]; out.push([(p[0]/2-210)/150,(p[1]/2+90-165)/150]); } }
+    while(out.length<N) out.push([rnd(-1,1),rnd(-.5,.5)]);
+    return out;
+  }
+
+  function resize(){
+    dpr=Math.min(2,devicePixelRatio||1); const r=cv.getBoundingClientRect(); W=r.width; H=r.height;
+    cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    cx = mobile() ? W*.5 : W*.66; cy = mobile() ? H*.34 : H*.5; S = mobile() ? Math.min(W*.4,H*.24) : Math.min(W*.24,H*.34);
+  }
+  function init(){
+    shapes=[null,pulse(),chart(),bear()];
+    P=Array.from({length:N},(_,i)=>({d:Math.random()*.35, ox:0, oy:0, s:rnd(1.3,2.6), c:(i%6===0)?1:0, tw:Math.random()*6.28}));
+    resize();
+  }
+
+  function cellAt(i,t){ const a=t*.00022, b=.35; const [x,y,z]=cell[i];
+    const x1=x*Math.cos(a)+z*Math.sin(a), z1=-x*Math.sin(a)+z*Math.cos(a); const y1=y*Math.cos(b)-z1*Math.sin(b), z2=y*Math.sin(b)+z1*Math.cos(b);
+    const k=1/(1.9-z2*.45); return [x1*k*1.75, y1*k*1.75, z2]; }
+
+  function frame(now){
+    if (!visible) return;
+    const t=reduce?0:now-t0; ctx.clearRect(0,0,W,H);
+    const st=prog*3, a=Math.min(2,Math.floor(st)), local=st-a, m=clamp((local-.18)/.64,0,1);
+    const head=((t*.00035)%1)*2.7-1.35;
+    for(let i=0;i<N;i++){
+      const p=P[i]; let A,B,za=0,zb=0;
+      if(a===0){ const c=cellAt(i,t); A=c; za=c[2]; } else A=shapes[a][i];
+      if(a+1===0){} B=shapes[a+1][i];
+      const e=ease(clamp((m-p.d*.6)/(1-.35*.6),0,1));
+      let x=A[0]+(B[0]-A[0])*e, y=A[1]+(B[1]-A[1])*e;
+      let alpha=.9, size=p.s;
+      if(a===0){ const depth=(za+1)/2; alpha=(.28+.72*depth)*(1-e)+.9*e; size=p.s*(.7+.6*depth)*(1-e)+p.s*e; }
+      const shapeNow = e<.5?a:a+1;
+      if(shapeNow===1 && !reduce){ const dx=Math.abs(x-head); alpha*= .45+.55*Math.max(0,1-dx*2.2); }
+      if(!reduce) alpha*= .85+.15*Math.sin(t*.002+p.tw);
+      let X=cx+x*S, Y=cy+y*S;
+      // cursor repulsion
+      const dx=X-mouse.x, dy=Y-mouse.y, dd=dx*dx+dy*dy, R=110;
+      if(dd<R*R && !reduce){ const f=(1-Math.sqrt(dd)/R)*2.2; p.ox+=dx/Math.sqrt(dd+1)*f; p.oy+=dy/Math.sqrt(dd+1)*f; }
+      p.ox*=.9; p.oy*=.9; X+=p.ox; Y+=p.oy;
+      ctx.globalAlpha=clamp(alpha,0,1); ctx.fillStyle=p.c?"#8FB3E6":"#FEE678";
+      ctx.fillRect(X-size/2,Y-size/2,size,size);
+    }
+    ctx.globalAlpha=1;
+    requestAnimationFrame(frame);
+  }
+
+  function onScroll(){
+    words(); parallax();
+    const r=sec.getBoundingClientRect(), total=r.height-innerHeight;
+    prog=clamp(-r.top/total,0,1);
+    const idx=Math.min(3,Math.round(prog*3-.0));
+    steps.forEach((s,i)=>s.classList.toggle("on",i===Math.min(3,Math.floor(prog*3+.5))));
+    dots.forEach((d,i)=>d.classList.toggle("on",i===Math.min(3,Math.floor(prog*3+.5))));
+    if(hint) hint.style.opacity = prog>.04 ? 0 : 1;
+  }
+  cv.addEventListener("pointermove",e=>{const r=cv.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;});
+  cv.addEventListener("pointerleave",()=>{mouse.x=mouse.y=-1e4;});
+  sec.addEventListener("pointermove",e=>{const r=cv.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;});
+  sec.addEventListener("pointerleave",()=>{mouse.x=mouse.y=-1e4;});
+  new IntersectionObserver(es=>es.forEach(en=>{ const was=visible; visible=en.isIntersecting; if(visible&&!was){ resize(); requestAnimationFrame(frame);} })).observe(sec);
+  addEventListener("resize",()=>{ resize(); });
+  addEventListener("scroll",onScroll,{passive:true});
+  addEventListener("hashchange",()=>setTimeout(()=>{onScroll(); if(visible) resize();},50));
+  init(); onScroll();
+})();
 </script>
 </body>
 </html>
