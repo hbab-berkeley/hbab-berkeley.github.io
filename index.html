@@ -46,6 +46,9 @@ nav.main a.active{color:var(--ink)}
 nav.main a.join{border:1px solid var(--ink);border-radius:999px;padding:8px 20px;color:var(--ink)}
 nav.main a.join::after{display:none}
 nav.main a.join:hover{background:var(--ink);color:#fff}
+nav.main a.join.work{background:var(--navy);border-color:var(--navy);color:#fff;margin-left:-14px}
+nav.main a.join.work:hover{background:var(--navy-deep);border-color:var(--navy-deep)}
+nav.main a.join.work.active{box-shadow:0 0 0 3px rgba(254,230,120,.6)}
 .menu-btn{display:none;background:none;border:0;padding:8px;cursor:pointer}
 .menu-btn span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;transition:transform .2s,opacity .2s}
 
@@ -74,7 +77,7 @@ nav.main a.join:hover{background:var(--ink);color:#fff}
 .hero-bg .g2{background:radial-gradient(circle,rgba(254,230,120,.22),transparent 60%);right:-300px;bottom:-380px;animation-delay:-9s}
 .hero-bg .grid{position:absolute;inset:0;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Ccircle cx='28' cy='28' r='1.3' fill='white'/%3E%3C/svg%3E");mask-image:linear-gradient(180deg,#000 0%,transparent 85%);-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 85%)}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,61,.35) 0%,rgba(10,31,61,.45) 45%,rgba(10,31,61,.94) 100%),linear-gradient(90deg,rgba(10,31,61,.55) 0%,rgba(10,31,61,0) 65%)}
-.hero .content{position:relative;z-index:2;padding:0 28px 84px;max-width:var(--maxw);margin:0 auto;width:100%}
+.hero .content{position:relative;z-index:2;padding:130px 28px 84px;max-width:var(--maxw);margin:0 auto;width:100%}
 .kicker{display:inline-flex;align-items:center;gap:10px;font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-bright)}
 .kicker::before{content:"";width:26px;height:2px;background:currentColor}
 .hero h1{font-family:var(--serif);font-size:clamp(2.9rem,7vw,5.9rem);line-height:.98;letter-spacing:-.01em;font-weight:400;margin:18px 0 24px;max-width:14ch}
@@ -270,6 +273,32 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
   .cbox{padding:38px 28px}
 }
 
+
+/* ---- Work With Us ---- */
+.svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:44px;background:var(--hairline);border:1px solid var(--hairline);border-radius:22px;overflow:hidden}
+.svc{background:#fff;padding:34px 30px 36px;transition:background .25s}
+.svc:hover{background:var(--paper)}
+.svc .ic{width:44px;height:44px;border-radius:12px;background:var(--teal-pale);display:grid;place-items:center;margin-bottom:20px}
+.svc .ic svg{width:22px;height:22px}
+.svc h3{font-size:1.1rem;margin-bottom:8px}
+.svc p{margin:0;color:var(--ink-soft);font-size:.95rem}
+.steps2{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:48px;position:relative}
+.steps2::before{content:"";position:absolute;left:0;right:0;top:26px;height:1px;background:var(--hairline)}
+.step2{position:relative}
+.step2 .n{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--navy);color:var(--yellow);font-family:var(--serif);font-size:1.35rem;margin-bottom:22px;position:relative}
+.step2 h3{font-family:var(--serif);font-weight:400;font-size:1.75rem;letter-spacing:0;margin-bottom:8px}
+.step2 p{margin:0;color:var(--ink-soft);font-size:.96rem}
+@media (max-width:980px){
+  .svcs{grid-template-columns:1fr 1fr}
+  .split{gap:22px}
+  .steps2{grid-template-columns:1fr 1fr;gap:34px 24px}
+  .steps2::before{display:none}
+}
+@media (max-width:600px){
+  .svcs{grid-template-columns:1fr}
+  .steps2{grid-template-columns:1fr}
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:980px){
   .cards,.upnext-grid{grid-template-columns:1fr}
@@ -286,6 +315,7 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
   nav.main.open{transform:none;visibility:visible;transition:transform .3s var(--ease),visibility 0s}
   nav.main a{padding:14px 0;width:100%;border-bottom:1px solid var(--hairline);font-size:1.05rem}
   nav.main a.join{margin-top:16px;text-align:center;border-bottom:1px solid var(--ink)}
+  nav.main a.join.work{margin-left:0;margin-top:10px}
   .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .menu-btn.open span:nth-child(2){opacity:0}
   .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -322,6 +352,7 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
       <a href="#decal" data-nav="decal">DeCal</a>
       <a href="#people" data-nav="people">People</a>
       <a href="#join" data-nav="join" class="join">Join Us</a>
+      <a href="#work" data-nav="work" class="join work">Work With Us</a>
     </nav>
   </div>
 </header>
@@ -424,10 +455,10 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
           <svg class="band-bear" viewBox="0 0 400 145" aria-hidden="true"><use href="#hbab-art" width="400" height="145"/></svg>
           <p class="eyebrow" style="color:var(--yellow)">For partners</p>
           <h3>Work with <em class="accent">HBAB.</em></h3>
-          <p>We partner with companies, startups, clinicians, and alumni through speaker events, workshops, recruiting, and sponsorships. Reach out to start a conversation.</p>
+          <p>We take on consulting projects for companies, startups, and organizations across healthcare and the life sciences, and partner on speaker events, workshops, and recruiting.</p>
           <div class="btns">
-            <a class="btn teal" href="https://www.linkedin.com/company/healthcare-business-association-at-berkeley-hbab" target="_blank" rel="noopener">Contact us on LinkedIn</a>
-            <a class="btn light" href="https://www.instagram.com/hbaberkeley/" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn teal" href="#work">Our consulting services</a>
+            <a class="btn light" href="https://www.linkedin.com/company/healthcare-business-association-at-berkeley-hbab" target="_blank" rel="noopener">Contact us on LinkedIn</a>
           </div>
         </div>
       </div>
@@ -603,6 +634,93 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
     </div>
   </section>
 </div>
+
+<!-- ======================= WORK WITH US ======================= -->
+<div class="page" id="page-work">
+  <section class="hero short">
+    <div class="hero-bg"><img class="hero-photo" src="img/groups/hero-work.jpg" alt="Five HBAB members in professional attire" style="object-position:50% 30%"><div class="glow g1"></div><div class="grid"></div></div>
+    <div class="content">
+      <span class="kicker">For organizations</span>
+      <h1>Work with <em class="accent">HBAB.</em></h1>
+      <p class="lede">We're a team of Berkeley students who take on consulting projects across healthcare and the life sciences. Bring us a business question, and we'll bring the research, analysis, and fresh perspective to answer it.</p>
+      <div class="btns">
+        <a class="btn teal" href="#work" data-scroll="work-contact">Start a conversation</a>
+        <a class="btn light" href="#work" data-scroll="work-services">Our services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap split">
+      <div class="reveal">
+        <p class="eyebrow">What we do</p>
+        <h2>Consulting for the business of <em class="accent">health.</em></h2>
+      </div>
+      <div class="reveal">
+        <p>HBAB consultants combine backgrounds in biology, public health, economics, business, and engineering. Each project is staffed by a dedicated student team that works directly with your organization from first conversation to final recommendation.</p>
+        <p>We work with organizations at every stage, from early-stage startups testing an idea to established companies exploring a new market.</p>
+        <div class="pills"><span class="pill">Biotech &amp; Pharma</span><span class="pill">Digital Health</span><span class="pill">Medical Devices</span><span class="pill">Health Systems &amp; Providers</span><span class="pill">Nonprofits &amp; Public Health</span><span class="pill">Early-Stage Startups</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block warm" id="work-services">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Services</p>
+        <h2>How we can <em class="accent">help.</em></h2>
+        <p class="lead">Every engagement is tailored to your goals. Most projects draw on one or more of these areas.</p>
+      </div>
+      <div class="svcs">
+        <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2B5A97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><h3>Market research &amp; sizing</h3><p>Size and segment your market, understand demand, and identify the opportunities worth pursuing.</p></div>
+        <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2B5A97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Competitive landscape</h3><p>Map competitors, benchmark offerings, and find where your organization can stand apart.</p></div>
+        <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2B5A97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div><h3>Go-to-market strategy</h3><p>Define target customers, positioning, and channels, and build a plan to reach them.</p></div>
+        <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2B5A97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6L5 18a2 2 0 0 0 1.7 3h10.6A2 2 0 0 0 19 18l-5-9V3"/></svg></div><h3>Product &amp; commercialization</h3><p>Evaluate new products, technologies, or indications and chart a realistic path to market.</p></div>
+        <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2B5A97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></div><h3>Operations &amp; process</h3><p>Analyze workflows and operations to reduce costs and improve the patient or customer experience.</p></div>
+        <div class="svc reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#2B5A97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h4M7 17h6"/></svg></div><h3>Financial analysis</h3><p>Build models and business cases that support pricing, investment, and growth decisions.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="eyebrow">Our approach</p>
+        <h2>From question to <em class="accent">recommendation.</em></h2>
+        <p class="lead">A clear, structured process keeps every project focused on what matters to your organization.</p>
+      </div>
+      <div class="steps2">
+        <div class="step2 reveal"><span class="n">01</span><h3>Scope</h3><p>We meet with your team to define the problem, the key questions, and what a successful outcome looks like.</p></div>
+        <div class="step2 reveal"><span class="n">02</span><h3>Research</h3><p>We gather the evidence: industry and market data, competitor analysis, and interviews with experts and customers.</p></div>
+        <div class="step2 reveal"><span class="n">03</span><h3>Analyze</h3><p>We turn findings into insight with structured frameworks and models, checking in with your team along the way.</p></div>
+        <div class="step2 reveal"><span class="n">04</span><h3>Deliver</h3><p>We present clear, actionable recommendations in a final presentation and report your team can put to work.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block tight" id="work-contact">
+    <div class="wrap">
+      <div class="band reveal">
+        <svg class="band-bear" viewBox="0 0 400 145" aria-hidden="true"><use href="#hbab-art" width="400" height="145"/></svg>
+        <div>
+          <p class="eyebrow" style="color:var(--yellow)">Get in touch</p>
+          <h2>Have a project <em class="accent">in mind?</em></h2>
+          <p>Tell us about your organization and the problem you're working on. We'll follow up to set up an introductory call and explore whether we're a good fit.</p>
+          <div class="btns" style="margin-top:26px">
+            <a class="btn teal" href="https://www.linkedin.com/company/healthcare-business-association-at-berkeley-hbab" target="_blank" rel="noopener">Message us on LinkedIn</a>
+            <a class="btn light" href="https://www.instagram.com/hbaberkeley/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+        <ul>
+          <li>Dedicated student team for each project</li>
+          <li>Regular check-ins on your schedule</li>
+          <li>Final presentation and written deliverable</li>
+          <li>Focused on healthcare and the life sciences</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
 </main>
 
 <!-- ======================= FOOTER ======================= -->
@@ -629,6 +747,7 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
           <li><a href="#decal">DeCal</a></li>
           <li><a href="#people">People</a></li>
           <li><a href="#join">Join Us</a></li>
+          <li><a href="#work">Work With Us</a></li>
         </ul>
       </div>
     </div>
@@ -665,7 +784,7 @@ document.getElementById("team").innerHTML = TEAM.map(m => `
   </div>`).join("");
 
 /* ---- simple hash router ---- */
-const PAGES = ["home","about","decal","people","join"];
+const PAGES = ["home","about","decal","people","join","work"];
 const menuBtn = document.querySelector(".menu-btn");
 const nav = document.querySelector("nav.main");
 let io;
@@ -684,10 +803,11 @@ function route(){
   document.querySelectorAll("[data-nav]").forEach(a => a.classList.toggle("active", a.dataset.nav === id));
   nav.classList.remove("open"); menuBtn.classList.remove("open"); menuBtn.setAttribute("aria-expanded","false");
   window.scrollTo(0, 0);
-  document.title = (id === "home" ? "HBAB" : id === "decal" ? "UGBA 198 DeCal — HBAB" : id[0].toUpperCase()+id.slice(1)+" — HBAB") + " | Healthcare Business Association at Berkeley";
+  document.title = (id === "home" ? "HBAB" : id === "decal" ? "UGBA 198 DeCal — HBAB" : id === "work" ? "Work With Us — HBAB" : id[0].toUpperCase()+id.slice(1)+" — HBAB") + " | Healthcare Business Association at Berkeley";
   requestAnimationFrame(observe);
 }
 window.addEventListener("hashchange", route);
+document.addEventListener("click", e => { const b = e.target.closest("[data-scroll]"); if (!b) return; e.preventDefault(); document.getElementById(b.dataset.scroll)?.scrollIntoView({behavior:"smooth", block:"start"}); });
 menuBtn.addEventListener("click", () => {
   const open = nav.classList.toggle("open");
   menuBtn.classList.toggle("open", open);
