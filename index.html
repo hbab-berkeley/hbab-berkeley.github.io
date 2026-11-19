@@ -309,7 +309,7 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
 .marquee i{font-style:normal;color:var(--yellow-deep);font-size:1rem}
 @keyframes marq{to{transform:translateX(-50%)}}
 
-.story{position:relative;height:250vh;background:var(--navy-deep);color:#fff;margin-top:80px}
+.story{position:relative;height:340vh;background:var(--navy-deep);color:#fff;margin-top:80px}
 .story-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
 .story-sticky::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 70% 50%,rgba(43,90,151,.35),transparent 60%)}
 .story-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}
@@ -334,7 +334,7 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:60px;padding-
 [data-words] .w.lit{opacity:1}
 
 @media (max-width:820px){
-  .story{height:230vh}
+  .story{height:310vh}
   .story-copy{justify-content:flex-end;padding-bottom:110px}
   .story-sticky::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,transparent 35%,rgba(7,23,45,.92) 72%)}
   .story-steps{height:230px}
@@ -915,7 +915,7 @@ route();
   const steps = sec.querySelectorAll(".story-step"), dots = sec.querySelectorAll(".story-dots i"), hint = sec.querySelector(".story-hint");
   const mobile = () => innerWidth < 820;
   const N = innerWidth < 820 ? 750 : 1400;
-  let W=0, H=0, dpr=1, cx=0, cy=0, S=1, shapes=[], P=[], prog=0, visible=false, mouse={x:-1e4,y:-1e4}, t0=performance.now();
+  let W=0, H=0, dpr=1, cx=0, cy=0, S=1, shapes=[], P=[], prog=0, visible=false, mouse={x:-1e4,y:-1e4}, t0=performance.now(), sp=0;
 
   const rnd = (a,b) => a + Math.random()*(b-a);
   const ease = x => x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2;
@@ -980,7 +980,7 @@ route();
   function frame(now){
     if (!visible) return;
     const t=reduce?0:now-t0; ctx.clearRect(0,0,W,H);
-    const st=prog*3, a=Math.min(2,Math.floor(st)), local=st-a, m=clamp((local-.1)/.75,0,1);
+    sp+=(prog-sp)*(reduce?1:.075); const st=sp*3, a=Math.min(2,Math.floor(st)), local=st-a, m=clamp((local-.16)/.68,0,1);
     const head=((t*.00035)%1)*2.7-1.35;
     for(let i=0;i<N;i++){
       const p=P[i]; let A,B,za=0,zb=0;
